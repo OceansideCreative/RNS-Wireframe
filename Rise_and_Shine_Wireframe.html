@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise and Shine Bakery — Website Wireframe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #444; background: #F5F5F5; font-size: 14px; line-height: 1.5; }
+
+  .page-tabs {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: #2D2D2D; display: flex; overflow-x: auto; padding: 0;
+  }
+  .page-tab {
+    flex: 1; min-width: max-content; padding: 12px 16px;
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent;
+  }
+  .page-tab.active { color: white; border-bottom-color: #666; }
+  .page-tab:hover { color: rgba(255,255,255,0.8); }
+
+  .page { display: none; margin-top: 44px; padding-bottom: 40px; }
+  .page.active { display: block; }
+
+  .frame {
+    max-width: 900px; margin: 24px auto; background: white;
+    border: 1px solid #DDD; border-radius: 4px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  /* Wireframe nav */
+  .wf-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; border-bottom: 1px solid #E5E5E5;
+  }
+  .wf-logo { font-size: 15px; font-weight: 700; color: #333; }
+  .wf-nav-links { display: flex; gap: 16px; align-items: center; }
+  .wf-nav-links span { font-size: 12px; color: #888; }
+  .wf-donate-btn {
+    font-size: 11px; background: #E5E5E5; padding: 5px 14px;
+    border-radius: 3px; font-weight: 700; color: #555;
+  }
+
+  /* Sections */
+  .wf-section {
+    padding: 32px 24px; border-bottom: 1px solid #EDEDED;
+    position: relative;
+  }
+  .wf-section:last-child { border-bottom: none; }
+  .wf-section-label {
+    position: absolute; top: 8px; right: 12px;
+    font-size: 10px; color: #BBB; text-transform: uppercase;
+    letter-spacing: 0.05em; font-weight: 600;
+  }
+
+  /* Dark section */
+  .wf-dark { background: #3A3A3A; color: white; }
+  .wf-dark .wf-section-label { color: rgba(255,255,255,0.3); }
+  .wf-dark h2, .wf-dark h3 { color: white; }
+  .wf-dark p { color: rgba(255,255,255,0.6); }
+
+  /* Medium section */
+  .wf-mid { background: #ECECEC; }
+
+  /* Light warm section */
+  .wf-warm { background: #F9F6F2; }
+
+  /* Headings */
+  h2 { font-size: 20px; color: #333; margin-bottom: 8px; }
+  h3 { font-size: 15px; color: #444; margin-bottom: 6px; }
+  p { color: #888; font-size: 13px; }
+
+  /* Image placeholder */
+  .wf-img {
+    background: #E8E8E8; border: 1px dashed #CCC; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: #AAA; font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Button placeholder */
+  .wf-btn {
+    display: inline-block; padding: 8px 20px; border: 1px solid #CCC;
+    border-radius: 3px; font-size: 12px; font-weight: 600; color: #666;
+    background: #F5F5F5; margin-top: 8px;
+  }
+  .wf-btn-dark {
+    background: #3A3A3A; color: white; border-color: #3A3A3A;
+  }
+  .wf-btn-accent {
+    background: #E5D5A0; color: #555; border-color: #D4C48E;
+  }
+
+  /* Grid helpers */
+  .wf-row { display: flex; gap: 16px; margin-top: 16px; }
+  .wf-col { flex: 1; }
+  .wf-center { text-align: center; }
+
+  /* Card */
+  .wf-card {
+    border: 1px solid #E5E5E5; border-radius: 4px; overflow: hidden;
+    background: white;
+  }
+  .wf-card-body { padding: 14px; }
+  .wf-card-body h3 { font-size: 13px; }
+  .wf-card-body p { font-size: 11px; }
+
+  /* Stat */
+  .wf-stat { text-align: center; padding: 12px; }
+  .wf-stat-num { font-size: 28px; font-weight: 700; color: #555; }
+  .wf-stat-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+
+  /* Board member */
+  .wf-member {
+    padding: 10px 14px; background: #F5F5F5; border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .wf-member h4 { font-size: 12px; color: #444; margin-bottom: 1px; }
+  .wf-member p { font-size: 10px; color: #999; }
+
+  /* Circle photo */
+  .wf-circle {
+    width: 80px; height: 80px; border-radius: 50%; background: #E8E8E8;
+    border: 1px dashed #CCC; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: #BBB; font-weight: 600;
+  }
+  .wf-circle-lg { width: 140px; height: 140px; font-size: 11px; }
+
+  /* Timeline step */
+  .wf-step { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+  .wf-step-num {
+    min-width: 32px; height: 32px; background: #E5D5A0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #666;
+  }
+  .wf-step-text h3 { font-size: 13px; margin-bottom: 2px; }
+  .wf-step-text p { font-size: 11px; }
+
+  /* Form */
+  .wf-input {
+    width: 100%; padding: 8px 12px; border: 1px solid #DDD; border-radius: 3px;
+    font-size: 12px; color: #999; background: #FAFAFA; margin-bottom: 8px;
+  }
+
+  /* Footer */
+  .wf-footer { padding: 24px; background: #3A3A3A; }
+  .wf-footer p { color: rgba(255,255,255,0.4); font-size: 11px; }
+  .wf-footer h4 { color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+
+  /* Page title */
+  .page-title {
+    max-width: 900px; margin: 24px auto 0; padding: 0 0 8px;
+    font-size: 18px; font-weight: 700; color: #333;
+    border-bottom: 2px solid #DDD;
+  }
+
+  /* Note */
+  .wf-note {
+    max-width: 900px; margin: 8px auto 0;
+    font-size: 11px; color: #AAA; font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-tabs">
+  <button class="page-tab active" onclick="showPage('home')">Home</button>
+  <button class="page-tab" onclick="showPage('mission')">Our Mission</button>
+  <button class="page-tab" onclick="showPage('team')">Our Team</button>
+  <button class="page-tab" onclick="showPage('graduates')">Graduates</button>
+  <button class="page-tab" onclick="showPage('program')">Our Program</button>
+  <button class="page-tab" onclick="showPage('shop')">Shop</button>
+  <button class="page-tab" onclick="showPage('donate')">Donate</button>
+  <button class="page-tab" onclick="showPage('events')">Events</button>
+  <button class="page-tab" onclick="showPage('volunteer')">Volunteer</button>
+</div>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+<div class="page-title">Homepage</div>
+<div class="wf-note">Placeholder images marked with dashed borders will be replaced with your photos.</div>
+<div class="frame">
+  <div class="wf-nav">
+    <div class="wf-logo">☀ Rise & Shine Bakery</div>
+    <div class="wf-nav-links">
+      <span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span>
+      <span class="wf-donate-btn">DONATE</span>
+    </div>
+  </div>
+
+  <div class="wf-section wf-dark" style="padding:60px 24px; text-align:center;">
+    <div class="wf-section-label">Hero</div>
+    <p style="color:rgba(255,255,255,0.4); font-size:11px; margin-bottom:12px;">ANNAPOLIS, MARYLAND</p>
+    <h2 style="font-size:28px; color:white;">Every Cookie Changes a Life</h2>
+    <p style="max-width:500px; margin:10px auto 20px;">Rise and Shine Bakery provides workforce training and employment for people overcoming barriers — one batch at a time.</p>
+    <span class="wf-btn">Our Mission</span>
+    <span class="wf-btn wf-btn-accent">Donate</span>
+  </div>
+
+  <div class="wf-section wf-dark" style="padding:24px; text-align:center; background:#4A4A4A;">
+    <div class="wf-section-label">Mission Statement</div>
+    <p style="font-style:italic; color:rgba(255,255,255,0.7); font-size:14px;">"The mission of Rise and Shine is to provide workforce training and jobs in the baking and food industries for people with barriers to employment."</p>
+  </div>
+
+  <div class="wf-section wf-warm">
+    <div class="wf-section-label">What We Do</div>
+    <div class="wf-center"><h2>Building Pathways to Employment</h2><p>We serve individuals who face barriers others don't see.</p></div>
+    <div class="wf-row">
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Professional Training</h3><p>Baking skills, resume writing, interviews, soft skills.</p></div></div></div>
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Wrap-Around Support</h3><p>Case management, trauma-informed care, therapeutic programs.</p></div></div></div>
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Real Opportunity</h3><p>Professional skills, personal growth, pathway to employment.</p></div></div></div>
+    </div>
+  </div>
+
+  <div class="wf-section" style="background:#E5D5A0;">
+    <div class="wf-section-label" style="color:#8B7A4A;">Impact Stats</div>
+    <div class="wf-row">
+      <div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Graduates</div></div>
+      <div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Employment Rate</div></div>
+      <div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Partners</div></div>
+      <div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Cohorts</div></div>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="wf-section-label">Graduate Spotlight</div>
+    <div class="wf-center"><h2>Meet the People Finding Their Path</h2></div>
+    <div class="wf-row" style="align-items:center;">
+      <div class="wf-col"><div class="wf-img" style="height:220px;">Graduate Photo</div></div>
+      <div class="wf-col"><p style="font-style:italic; font-size:14px; color:#666; border-left:3px solid #E5D5A0; padding-left:14px;">"Graduate quote about their experience..."</p><p style="margin-top:8px; font-weight:700; font-size:12px; color:#444;">— Name, Cohort</p><span class="wf-btn wf-btn-dark">Read More Stories</span></div>
+    </div>
+  </div>
+
+  <div class="wf-section wf-warm">
+    <div class="wf-section-label">Products</div>
+    <div class="wf-center"><h2>Cookies That Do Good</h2><p>Every cookie is baked from scratch. Every purchase supports our mission.</p></div>
+    <div class="wf-row">
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Cookie Photo</div><div class="wf-card-body"><h3>Brown Butter Sea Salt CC</h3><p>$3.00</p><span class="wf-btn" style="font-size:10px;">Order Now</span></div></div></div>
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Cookie Photo</div><div class="wf-card-body"><h3>Oatmeal Pecan Brittle</h3><p>$3.00</p><span class="wf-btn" style="font-size:10px;">Order Now</span></div></div></div>
+      <div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Cookie Photo</div><div class="wf-card-body"><h3>Molasses Ginger</h3><p>$3.00</p><span class="wf-btn" style="font-size:10px;">Order Now</span></div></div></div>
+    </div>
+    <div class="wf-center" style="margin-top:16px;"><span class="wf-btn wf-btn-dark">View All Cookies</span></div>
+  </div>
+
+  <div class="wf-section wf-dark">
+    <div class="wf-section-label">Call to Action</div>
+    <div class="wf-center"><h2>How You Can Help</h2></div>
+    <div class="wf-row" style="text-align:center;">
+      <div class="wf-col"><h3 style="color:#E5D5A0;">Donate</h3><p>Your support funds training and services.</p><span class="wf-btn wf-btn-accent">Give Now</span></div>
+      <div class="wf-col"><h3 style="color:#E5D5A0;">Volunteer</h3><p>Share your time and skills.</p><span class="wf-btn wf-btn-accent">Get Involved</span></div>
+      <div class="wf-col"><h3 style="color:#E5D5A0;">Order Cookies</h3><p>Every purchase supports our mission.</p><span class="wf-btn wf-btn-accent">Shop Now</span></div>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="wf-section-label">Email Signup</div>
+    <div class="wf-row" style="align-items:center;">
+      <div class="wf-col"><div class="wf-img" style="height:140px;">Photo</div></div>
+      <div class="wf-col"><h3>Stay Connected</h3><p>Get updates on graduates, events, and new cookie flavors.</p><div style="display:flex; gap:8px; margin-top:10px;"><div class="wf-input" style="margin:0; flex:1;">email@example.com</div><span class="wf-btn wf-btn-accent" style="margin:0;">Subscribe</span></div></div>
+    </div>
+  </div>
+
+  <div class="wf-section" style="padding:16px 24px; text-align:center; border-top:1px solid #EDEDED;">
+    <div class="wf-section-label">Partners</div>
+    <p style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:#BBB; margin-bottom:10px;">Our Partners & Supporters</p>
+    <div style="display:flex; gap:16px; justify-content:center;">
+      <div class="wf-img" style="width:90px; height:36px; font-size:8px;">Logo</div>
+      <div class="wf-img" style="width:90px; height:36px; font-size:8px;">Logo</div>
+      <div class="wf-img" style="width:90px; height:36px; font-size:8px;">Logo</div>
+      <div class="wf-img" style="width:90px; height:36px; font-size:8px;">Logo</div>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div style="display:flex; gap:24px;">
+      <div style="flex:1.5;"><p style="font-weight:700; color:rgba(255,255,255,0.7);">☀ Rise & Shine Bakery</p><p>Annapolis, Maryland</p><p>501(c)(3) · EIN: 87-1357909</p></div>
+      <div style="flex:1;"><h4>Quick Links</h4><p>About · Program · Shop · Donate · Volunteer · FAQ</p></div>
+      <div style="flex:1;"><h4>Contact</h4><p>PO Box 3177, Annapolis, MD 21403<br>410-934-7569</p></div>
+      <div style="flex:1;"><h4>Stay Connected</h4><p>Email signup</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== MISSION ==================== -->
+<div class="page" id="page-mission">
+<div class="page-title">Our Mission</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">Our Mission</h2><p>Providing workforce training and jobs in the baking and food industries for people with barriers to employment.</p></div>
+  <div class="wf-section"><div class="wf-section-label">Our Story</div><div class="wf-center"><h2>How It Started</h2></div><div class="wf-row" style="align-items:center;"><div class="wf-col"><div class="wf-img" style="height:200px;">Founders Photo</div></div><div class="wf-col"><p style="font-size:13px; color:#666;">Rise and Shine was founded by Elizabeth Kinney and Pam Siemer, both former EDs of The Light House in Annapolis. They created a program combining professional baking training with workforce development.</p></div></div></div>
+  <div class="wf-section wf-warm"><div class="wf-section-label">What We Do</div><div class="wf-center"><h2>What We Do</h2></div><div class="wf-row" style="align-items:center; margin-bottom:24px;"><div class="wf-col"><div class="wf-img" style="height:160px;">Baking Training</div></div><div class="wf-col"><h3>Professional Baking Training</h3><p>Students learn to bake from scratch using all-natural ingredients.</p></div></div><div class="wf-row" style="align-items:center; flex-direction:row-reverse; margin-bottom:24px;"><div class="wf-col"><div class="wf-img" style="height:160px;">Classroom</div></div><div class="wf-col"><h3>Workforce Development</h3><p>Resume building, mock interviews, soft skills training.</p></div></div><div class="wf-row" style="align-items:center;"><div class="wf-col"><div class="wf-img" style="height:160px;">Mentoring</div></div><div class="wf-col"><h3>Wrap-Around Services</h3><p>Case management, trauma-informed care, therapeutic programs.</p></div></div></div>
+  <div class="wf-section" style="background:#E5D5A0; text-align:center;"><div class="wf-section-label" style="color:#8B7A4A;">Who We Serve</div><p style="font-size:14px; font-weight:600; color:#555; max-width:600px; margin:0 auto;">Individuals experiencing homelessness, veterans, those in recovery, formerly incarcerated, youth aging out of foster care, single mothers, and survivors of domestic violence.</p></div>
+  <div class="wf-section" style="background:#E5D5A0;"><div class="wf-row"><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Graduates</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Employment Rate</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Partners</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Cohorts</div></div></div></div>
+  <div class="wf-section wf-dark" style="text-align:center; padding:32px;"><h2 style="font-size:20px;">Ready to Support Our Mission?</h2><div style="margin-top:12px;"><span class="wf-btn wf-btn-accent">Donate</span> <span class="wf-btn" style="border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.7);">Volunteer</span></div></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== TEAM ==================== -->
+<div class="page" id="page-team">
+<div class="page-title">Our Team</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">The People Behind Rise and Shine</h2><p>Our team and board bring decades of experience.</p></div>
+  <div class="wf-section"><div class="wf-section-label">Leadership</div><div class="wf-center"><h2>Our Leadership</h2></div><div class="wf-row" style="align-items:center;"><div class="wf-col" style="text-align:center;"><div class="wf-circle wf-circle-lg">Headshot</div></div><div class="wf-col"><h3 style="font-size:18px;">Donna Wyatt</h3><p style="color:#D4A843; font-weight:600; font-size:12px;">Executive Director</p><p style="margin-top:8px;">Bio placeholder — Donna's background and passion for the mission.</p></div></div></div>
+  <div class="wf-section wf-warm"><div class="wf-section-label">Staff</div><div class="wf-center"><h2>Our Team</h2></div><div class="wf-row" style="text-align:center;"><div class="wf-col"><div class="wf-circle">Headshot</div><h3 style="font-size:12px;">Michelle Wilson</h3><p style="font-size:10px; color:#D4A843;">Baking Instructor</p></div><div class="wf-col"><div class="wf-circle">Headshot</div><h3 style="font-size:12px;">Pedro DelGranado</h3><p style="font-size:10px; color:#D4A843;">Asst. Instructor</p></div><div class="wf-col"><div class="wf-circle">Headshot</div><h3 style="font-size:12px;">Cathy Ferguson</h3><p style="font-size:10px; color:#D4A843;">Production Baker</p></div><div class="wf-col"><div class="wf-circle">Headshot</div><h3 style="font-size:12px;">Richard Brewer</h3><p style="font-size:10px; color:#D4A843;">Van Driver</p></div></div></div>
+  <div class="wf-section"><div class="wf-section-label">Board</div><div class="wf-center"><h2>Board of Directors</h2></div><p style="text-align:center; margin-bottom:12px; font-weight:700; font-size:12px; color:#999;">OFFICERS</p><div class="wf-row"><div class="wf-col"><div class="wf-member"><h4>Elizabeth Kinney</h4><p>President & Co-Founder</p></div></div><div class="wf-col"><div class="wf-member"><h4>Pam Siemer</h4><p>VP & Co-Founder</p></div></div><div class="wf-col"><div class="wf-member"><h4>Ray Ottenberg</h4><p>Treasurer</p></div></div><div class="wf-col"><div class="wf-member"><h4>Ruth Coughlan</h4><p>Secretary</p></div></div></div><p style="text-align:center; margin:16px 0 12px; font-weight:700; font-size:12px; color:#999;">DIRECTORS</p><div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;"><div class="wf-member"><h4>Tracey Banghart</h4></div><div class="wf-member"><h4>Kevin Cross</h4></div><div class="wf-member"><h4>Jean Hartge</h4></div><div class="wf-member"><h4>Laura Holliday</h4></div><div class="wf-member"><h4>Zach Howell</h4></div><div class="wf-member"><h4>Heather Hurley</h4></div><div class="wf-member"><h4>Beth Laverick</h4></div><div class="wf-member"><h4>Natalie Loper</h4></div><div class="wf-member"><h4>Cindy Milligan</h4></div><div class="wf-member"><h4>Deeanna Nolan</h4></div><div class="wf-member"><h4>Vince Penno</h4></div><div class="wf-member"><h4>Andrea Rodriguez</h4></div><div class="wf-member"><h4>Irene Worthington</h4></div></div><p style="text-align:center; margin-top:12px; font-size:11px; color:#999;"><strong>Advisory:</strong> David Sullivan, Bill Malone</p></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== GRADUATES ==================== -->
+<div class="page" id="page-graduates">
+<div class="page-title">Our Graduates</div>
+<div class="wf-note">This page needs graduate stories, photos, and quotes from your team.</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">Lives Changed, Futures Built</h2><p>Every graduate leaves with professional skills and a new path forward.</p></div>
+  <div class="wf-section"><div class="wf-section-label">Stories</div><div class="wf-center"><h2>Their Stories Are Our Mission</h2></div><div class="wf-row" style="align-items:center; margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid #EEE;"><div class="wf-col"><div class="wf-img" style="height:200px;">Graduate Photo</div></div><div class="wf-col"><p style="font-size:10px; color:#D4A843; font-weight:700; text-transform:uppercase;">Graduate Story</p><h3>Graduate Name</h3><p style="font-style:italic; border-left:3px solid #E5D5A0; padding-left:12px; margin:8px 0;">"Their story about the program..."</p><p style="font-size:11px; background:#F9F6F2; padding:8px; border-radius:3px;"><strong>Now:</strong> Employed and thriving</p></div></div><div class="wf-row" style="align-items:center; flex-direction:row-reverse; margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid #EEE;"><div class="wf-col"><div class="wf-img" style="height:200px;">Graduate Photo</div></div><div class="wf-col"><p style="font-size:10px; color:#D4A843; font-weight:700; text-transform:uppercase;">Graduate Story</p><h3>Graduate Name</h3><p style="font-style:italic; border-left:3px solid #E5D5A0; padding-left:12px; margin:8px 0;">"Their story..."</p><p style="font-size:11px; background:#F9F6F2; padding:8px; border-radius:3px;"><strong>Now:</strong> Building a new career</p></div></div><div class="wf-row" style="align-items:center;"><div class="wf-col"><div class="wf-img" style="height:200px;">Graduate Photo</div></div><div class="wf-col"><p style="font-size:10px; color:#D4A843; font-weight:700; text-transform:uppercase;">Graduate Story</p><h3>Graduate Name</h3><p style="font-style:italic; border-left:3px solid #E5D5A0; padding-left:12px; margin:8px 0;">"Their story..."</p><p style="font-size:11px; background:#F9F6F2; padding:8px; border-radius:3px;"><strong>Now:</strong> Independent and employed</p></div></div></div>
+  <div class="wf-section" style="background:#E5D5A0;"><div class="wf-row"><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Graduates</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Employment Rate</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Partners</div></div><div class="wf-col wf-stat"><div class="wf-stat-num">—</div><div class="wf-stat-label">Cohorts</div></div></div></div>
+  <div class="wf-section wf-dark" style="text-align:center; padding:32px;"><h2 style="font-size:20px;">Help Write the Next Success Story</h2><span class="wf-btn wf-btn-accent" style="margin-top:12px;">Donate Now</span></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== PROGRAM ==================== -->
+<div class="page" id="page-program">
+<div class="page-title">Our Program</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">How Our Program Works</h2><p>Comprehensive workforce training built around baking, life skills, and personal growth.</p></div>
+  <div class="wf-section"><div class="wf-section-label">Program Steps</div><div class="wf-center"><h2>The Journey</h2></div><div style="max-width:500px; margin:20px auto 0;"><div class="wf-step"><div class="wf-step-num">1</div><div class="wf-step-text"><h3>Application & Intake</h3><p>Supportive intake process meeting each person where they are.</p></div></div><div class="wf-step"><div class="wf-step-num">2</div><div class="wf-step-text"><h3>Professional Baking Training</h3><p>Commercial baking from scratch with all-natural ingredients.</p></div></div><div class="wf-step"><div class="wf-step-num">3</div><div class="wf-step-text"><h3>Workforce Development</h3><p>Resume building, mock interviews, soft skills.</p></div></div><div class="wf-step"><div class="wf-step-num">4</div><div class="wf-step-text"><h3>Wrap-Around Services</h3><p>Case management, trauma-informed care, therapeutic programs.</p></div></div><div class="wf-step"><div class="wf-step-num">5</div><div class="wf-step-text"><h3>Graduation & Employment</h3><p>Skills, growth, and active support finding employment.</p></div></div></div></div>
+  <div class="wf-section wf-warm"><div class="wf-section-label">Skills</div><div class="wf-center"><h2>What Our Trainees Learn</h2></div><div class="wf-row"><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🍪 Baking Fundamentals</h3><p>Recipes, food safety, kitchen operations.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>📄 Resume & Interview</h3><p>Professional resumes, mock interviews.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🤝 Soft Skills</h3><p>Teamwork, accountability, communication.</p></div></div></div></div><div class="wf-row"><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>💼 Job Readiness</h3><p>Weekly workforce development modules.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>💛 Personal Growth</h3><p>Trauma-informed care, coping strategies.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🎯 Goal Setting</h3><p>Personalized case management and planning.</p></div></div></div></div></div>
+  <div class="wf-section wf-warm" style="text-align:center;"><h2>Interested in Our Program?</h2><p style="margin:8px 0 16px;">If you or someone you know could benefit, reach out.</p><span class="wf-btn wf-btn-dark">Contact Us About Enrollment</span></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== SHOP ==================== -->
+<div class="page" id="page-shop">
+<div class="page-title">Shop</div>
+<div class="wf-note">This page is powered by Shopify's native collection layout. Shown here for reference.</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:36px 24px; text-align:center;"><h2 style="font-size:22px;">Our Cookies</h2><p>Baked from scratch. Every purchase supports our mission.</p></div>
+  <div class="wf-section"><div class="wf-row"><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Brown Butter Sea Salt CC</h3><p>$3.00</p></div></div></div><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Chocolate Cocoa</h3><p>$3.00</p></div></div></div><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Oatmeal Pecan Brittle</h3><p>$3.00</p></div></div></div></div><div class="wf-row"><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Molasses Ginger</h3><p>$3.00</p></div></div></div><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Citrus Doodle</h3><p>$3.00</p></div></div></div><div class="wf-col"><div class="wf-card"><div class="wf-img" style="height:100px;">Photo</div><div class="wf-card-body"><h3>Soft Sugar</h3><p>$3.00</p></div></div></div></div></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== DONATE ==================== -->
+<div class="page" id="page-donate">
+<div class="page-title">Donate</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">Your Generosity Changes Lives</h2><p>Every dollar supports training, services, and a pathway to employment.</p></div>
+  <div class="wf-section wf-warm" style="text-align:center;"><div class="wf-section-label">Donation Widget</div><div style="max-width:400px; margin:0 auto; background:white; border:1px solid #DDD; border-radius:8px; padding:24px;"><h3 style="margin-bottom:16px;">Choose Your Gift</h3><div style="display:flex; gap:4px; margin-bottom:16px;"><span class="wf-btn wf-btn-accent" style="flex:1; text-align:center; font-size:11px;">One-Time</span><span class="wf-btn" style="flex:1; text-align:center; font-size:11px;">Monthly</span></div><div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:16px;"><span class="wf-btn" style="text-align:center; font-size:13px;">$25</span><span class="wf-btn" style="text-align:center; font-size:13px;">$50</span><span class="wf-btn wf-btn-accent" style="text-align:center; font-size:13px;">$100</span><span class="wf-btn" style="text-align:center; font-size:13px;">$250</span><span class="wf-btn" style="text-align:center; font-size:13px;">$500</span><span class="wf-btn" style="text-align:center; font-size:13px;">Other</span></div><span class="wf-btn wf-btn-accent" style="width:100%; text-align:center; display:block;">Donate Now</span><p style="font-size:10px; margin-top:12px;">501(c)(3) · EIN: 87-1357909 · Tax-deductible</p></div></div>
+  <div class="wf-section"><div class="wf-section-label">Impact</div><div class="wf-center"><h2>Your Impact</h2></div><div class="wf-row" style="text-align:center;"><div class="wf-col" style="padding:20px; background:#F9F6F2; border-radius:6px;"><h3 style="font-size:24px; color:#D4A843;">$25</h3><p>Baking supplies for one session</p></div><div class="wf-col" style="padding:20px; background:#F9F6F2; border-radius:6px;"><h3 style="font-size:24px; color:#D4A843;">$100</h3><p>One week of workforce development</p></div><div class="wf-col" style="padding:20px; background:#F9F6F2; border-radius:6px;"><h3 style="font-size:24px; color:#D4A843;">$500</h3><p>Sponsor a student through a cohort</p></div></div></div>
+  <div class="wf-section"><div class="wf-section-label">Other Ways</div><div class="wf-center"><h2>Other Ways to Give</h2></div><div class="wf-row" style="text-align:center;"><div class="wf-col"><h3>By Check</h3><p>PO Box 3177<br>Annapolis, MD 21403</p></div><div class="wf-col"><h3>Corporate</h3><p>dwyatt@riseandshinebakery.org</p></div><div class="wf-col"><h3>Questions?</h3><p>410-934-7569</p></div></div></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== EVENTS ==================== -->
+<div class="page" id="page-events">
+<div class="page-title">Events</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:36px 24px; text-align:center;"><h2 style="font-size:22px;">Upcoming Events</h2><p>Join us in the Annapolis community.</p></div>
+  <div class="wf-section"><div class="wf-section-label">Events</div><div class="wf-row" style="margin-bottom:16px; padding:16px; border:1px solid #E5E5E5; border-radius:6px; align-items:center;"><div class="wf-col" style="flex:0 0 140px;"><div class="wf-img" style="height:100px;">Photo</div></div><div class="wf-col"><span style="font-size:10px; background:#E5D5A0; padding:2px 8px; border-radius:3px; font-weight:700;">UPCOMING</span><h3 style="margin-top:4px;">ED Presentation — Annapolis Symphony</h3><p>Date TBD · Annapolis, MD</p></div></div><div class="wf-row" style="padding:16px; border:1px solid #E5E5E5; border-radius:6px; align-items:center;"><div class="wf-col" style="flex:0 0 140px;"><div class="wf-img" style="height:100px;">Photo</div></div><div class="wf-col"><span style="font-size:10px; background:#E5D5A0; padding:2px 8px; border-radius:3px; font-weight:700;">UPCOMING</span><h3 style="margin-top:4px;">Rise and Shine Trivia Night</h3><p>Date TBD · Annapolis, MD</p></div></div></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<!-- ==================== VOLUNTEER ==================== -->
+<div class="page" id="page-volunteer">
+<div class="page-title">Volunteer</div>
+<div class="frame">
+  <div class="wf-nav"><div class="wf-logo">☀ Rise & Shine Bakery</div><div class="wf-nav-links"><span>About</span><span>Our Program</span><span>Shop</span><span>Events</span><span>Blog</span><span>Contact</span><span class="wf-donate-btn">DONATE</span></div></div>
+  <div class="wf-section wf-dark" style="padding:48px 24px; text-align:center;"><h2 style="font-size:24px;">Give Your Time, Change a Life</h2><p>There are many ways to support Rise and Shine beyond a donation.</p></div>
+  <div class="wf-section wf-warm"><div class="wf-section-label">Opportunities</div><div class="wf-center"><h2>Ways to Get Involved</h2></div><div class="wf-row"><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🍳 Kitchen Volunteer</h3><p>Help during baking sessions.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🤝 Mentor</h3><p>Support a trainee through their journey.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>🎉 Event Support</h3><p>Help at fundraisers and events.</p></div></div></div><div class="wf-col"><div class="wf-card" style="border-top:2px solid #E5D5A0;"><div class="wf-card-body"><h3>💼 Pro Skills</h3><p>Share your expertise.</p></div></div></div></div></div>
+  <div class="wf-section"><div class="wf-section-label">How It Works</div><div class="wf-center"><h2>What to Expect</h2></div><div class="wf-row" style="text-align:center;"><div class="wf-col"><div class="wf-step-num" style="margin:0 auto 8px;">1</div><h3>Fill Out the Form</h3><p>Tell us how you'd like to help.</p></div><div class="wf-col"><div class="wf-step-num" style="margin:0 auto 8px;">2</div><h3>Meet the Team</h3><p>We'll find the right fit.</p></div><div class="wf-col"><div class="wf-step-num" style="margin:0 auto 8px;">3</div><h3>Make a Difference</h3><p>Start supporting our trainees.</p></div></div></div>
+  <div class="wf-section wf-warm"><div class="wf-section-label">Sign Up</div><div class="wf-center"><h2>Interested? Let Us Know.</h2></div><div style="max-width:400px; margin:16px auto 0;"><div class="wf-input">First Name</div><div class="wf-input">Last Name</div><div class="wf-input">Email</div><div class="wf-input">Phone</div><div class="wf-input">Area of Interest ▾</div><div class="wf-input" style="height:60px;">Message...</div><div class="wf-center"><span class="wf-btn wf-btn-accent">Submit</span></div></div></div>
+  <div class="wf-footer"><p style="text-align:center;">Footer</p></div>
+</div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
